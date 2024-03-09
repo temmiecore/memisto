@@ -17,11 +17,11 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Entry">
         <Stack.Screen name="Entry" component={EntryScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
-        <Stack.Screen name="ViewCreate" component={ViewCreateScreen} />
-        <Stack.Screen name="AppealList" component={AppealListScreen} />
-        <Stack.Screen name="Appeal" component={AppealScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Log In' }}/>
+        <Stack.Screen name="Signup" component={SignupScreen} options={{ title: 'Sign Up' }}/>
+        <Stack.Screen name="ViewCreate" component={ViewCreateScreen} options={{ title: 'Choose the action:' }}/>
+        <Stack.Screen name="AppealList" component={AppealListScreen} options={{ title: 'Appeal List' }}/>
+        <Stack.Screen name="Appeal" component={AppealScreen} options={{ title: 'Appeal' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

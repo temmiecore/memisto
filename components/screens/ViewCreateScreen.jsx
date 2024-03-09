@@ -11,7 +11,7 @@ const ViewCreateScreen = ({
                     //onPress={() => navigation.navigate("CreateAppeal")}  
                 />
                 <Button style={styles.button}
-                    title="View"
+                    title="View Appeals"
                     onPress={() => navigation.navigate("AppealList")} />
             </View>
         </View>
@@ -26,11 +26,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: '80%',
+        height: '20%',
+        justifyContent: "space-between"
     },
-    button: {
-        marginBottom: 50
-        // why doesn't this thing work
-    }
 });
 
 

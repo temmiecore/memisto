@@ -18,8 +18,8 @@ const EntryScreen = ({
         <View style={styles.container}>
             <Text style={styles.logoText}>MeMisto</Text>
             <View style={styles.buttonContainer}>
-                <Button title="Log In" onPress={() => navigation.navigate('Login')} />
-                <Button title="Sign Up" onPress={() => navigation.navigate('Signup')} />
+                <Button style={styles.button} title="Log In" onPress={() => navigation.navigate('Login')} />
+                <Button style={styles.button} title="Sign Up" onPress={() => navigation.navigate('Signup')} />
             </View>
         </View>
     )
@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
     logoText: {
       fontSize: 32,
       fontWeight: 'bold',
-      marginBottom: 20,
+      marginBottom: 50,
     },
     buttonContainer: {
-      width: '80%',
+      width: '60%',
       flexDirection: 'row',
       justifyContent: 'space-between',
     },

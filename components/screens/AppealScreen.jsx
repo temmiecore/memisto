@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 
 const AppealScreen = ({
   navigation,
@@ -41,41 +41,69 @@ const AppealScreen = ({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{item.name}</Text>
-      <Text style={styles.text}>Type: {item.type.charAt(0).toUpperCase() + item.type.slice(1)}</Text>
-      <Text style={styles.text}>Description: {item.description.charAt(0).toUpperCase() + item.description.slice(1)}</Text>
-      <Text style={styles.text}>Status:</Text>
-      <View style={styles.styleList}>
-        {status.map((item, index) => (
-          <Text key={index} style={styles.statusText}>{index+1}: {item.status.charAt(0).toUpperCase() + item.status.slice(1)}</Text>
-        ))}
+      <View style={styles.divider} />
+      <View style={styles.textContainer}>
+        <Text style={styles.label}>Type:</Text>
+        <Text style={styles.text}>{item.type.charAt(0).toUpperCase() + item.type.slice(1)}</Text>
+      </View>
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.label}>Description:</Text>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>{item.description.charAt(0).toUpperCase() + item.description.slice(1)}</Text>
+        </View>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.label}>Status:</Text>
+        <View style={styles.statusList}>
+          {status.map((statusItem, index) => (
+            <Text key={index} style={styles.statusText}>{index + 1}: {statusItem.status.charAt(0).toUpperCase() + statusItem.status.slice(1)}</Text>
+          ))}
+        </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 10,
   },
   title: {
-    fontSize: 24,
+    fontSize: 36,
     fontWeight: 'bold',
+    textAlign: 'left',
     marginBottom: 10,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#ccc',
+    marginBottom: 10,
+  },
+  textContainer: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  descriptionContainer: {
+    marginBottom: 10
   },
   text: {
     fontSize: 16,
-    marginBottom: 5,
-  },  
-  styleList: {
     flex: 1,
-    alignItems: 'center',
+    textAlign: 'right',
+  },
+  statusList: {
+    marginLeft: 20,
   },
   statusText: {
     fontSize: 16,
-    marginVertical: 5,
+    marginBottom: 5,
   },
 });
 

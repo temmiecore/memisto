@@ -45,13 +45,15 @@ const AppealListScreen = ({
     const renderItem = ({ item }) => {
         return (
             <View style={styles.item}>
-                <Button title={item.name} onPress={() => handleAppealPress(item)} />
-                <Image style={styles.image} 
+                <View style={styles.button}>
+                    <Button title={item.name} onPress={() => handleAppealPress(item)} />
+                </View>
+                <Image style={styles.image}
                     source={
-                    item.isSolved == "approved"
-                        ? circleGreen
-                        : circleRed
-                } />
+                        item.isSolved == "approved"
+                            ? circleGreen
+                            : circleRed
+                    } />
             </View>
         )
     }
@@ -72,13 +74,17 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
     },
+    list: {
+        width:"100%"
+    },
     item: {
         flexDirection: 'row',
+        alignContent: "center",
         marginBottom: 30,
-        gap: 20,
+        justifyContent: "space-between",
     },
-    itemText: {
-        marginLeft: 10,
+    button: {
+        width: 200
     },
     image: {
         width: 30,
