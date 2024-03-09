@@ -1,12 +1,48 @@
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 const LoginScreen = ({
     navigation,
 }) => {
-    const handleSubmit = () => {
-        // Handle user input. Check entry in DB or whatever
-        // If all good:
-        navigation.navigate("ViewCreate");
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+
+
+    const handleSubmit = async () => {
+        if (!mail || !password) {
+            Alert.alert('Error', 'Username and password are required.');
+            return;
+        }
+        try {
+            const response = await fetch('https://fc7f-188-163-103-97.ngrok-free.app/user_login',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ mail: mail, pass: password.toString() })
+                });
+
+            if (!response.ok) {
+                console.log("Responce: " + response);
+                throw new Error("");
+            }
+
+            const data = await response.json();
+            console.log(data);
+
+            if (data.failed == false) {
+                navigation.navigate("ViewCreate");
+            } else {
+                throw new Error('Incorrect email or password!');
+            }
+        }
+        catch (error) {
+            if (error.message == "")
+                Alert.alert('Error', 'Something went wrong. Try again!');
+            else
+                Alert.alert(error.message);
+        }
     }
 
     return (
@@ -16,13 +52,13 @@ const LoginScreen = ({
                 <TextInput
                     style={styles.input}
                     placeholder="Email"
-                // onChangeText={...}
+                    onChangeText={text => setMail(text)}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
                     secureTextEntry={true}
-                // onChangeText={...}
+                    onChangeText={text => setPassword(text)}
                 />
                 <Button title="Submit" onPress={handleSubmit} />
             </View>

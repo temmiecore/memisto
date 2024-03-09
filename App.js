@@ -8,6 +8,8 @@ import ViewCreateScreen from './components/screens/ViewCreateScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+//https://fc7f-188-163-103-97.ngrok-free.app
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
