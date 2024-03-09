@@ -8,10 +8,10 @@ const AppealScreen = ({
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{item.appealName}</Text>
-            <Text style={styles.detailText}>Type: {item.appealType}</Text>
-            <Text style={styles.detailText}>Description: {item.appealDesc}</Text>
-            <Text style={styles.detailText}>Status: {item.appealStatus}</Text>
+            <Text style={styles.title}>{item.name}</Text>
+            <Text style={styles.detailText}>Type: {item.type.charAt(0).toUpperCase() + item.type.slice(1)}</Text>
+            <Text style={styles.detailText}>Description: {item.description.charAt(0).toUpperCase() + item.description.slice(1)}</Text>
+            <Text style={styles.detailText}>Status: {item.isSolved ? "Solved" : "Pending"}</Text>
         </View>
     )
 }

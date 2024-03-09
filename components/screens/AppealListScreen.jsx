@@ -1,15 +1,39 @@
-import { View, FlatList, StyleSheet, Image, Button } from 'react-native';
-
-const appeals = [
-    { appealName: 'Appeal 1', appealStatus: 'approved', appealType: 'Broken road', appealDesc: 'Some description.' },
-    { appealName: 'Appeal 2', appealStatus: 'approved', appealType: 'Broken road, again', appealDesc: 'Some description 2.' },
-    { appealName: 'Appeal 3', appealStatus: 'rejected', appealType: 'Feral dogs', appealDesc: 'Some description 3.' },
-    { appealName: 'Appeal 4', appealStatus: 'approved', appealType: 'No trashcans!!!', appealDesc: 'Some description prequel.' },
-];
+import { useEffect, useState } from 'react';
+import { View, FlatList, StyleSheet, Image, Button, Alert } from 'react-native';
 
 const AppealListScreen = ({
     navigation,
 }) => {
+    const [appeals, setAppeals] = useState([]);
+
+    useEffect(() => {
+        fetchAppeals();
+    }, []);
+
+    const fetchAppeals = async () => {
+        try {
+            const response = await fetch('https://fc7f-188-163-103-97.ngrok-free.app/appeals', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                console.log(response);
+                throw new Error('Failed fetch');
+            }
+
+            const data = await response.json();
+            setAppeals(data);
+
+        } catch (error) {
+            console.error('Error:', error);
+            Alert.alert('Error', 'Something went wrong while fetching appeals. Please try again!');
+        }
+    };
+
+
     const handleAppealPress = (item) => {
         navigation.navigate("Appeal", { item: item });
     }
@@ -18,9 +42,9 @@ const AppealListScreen = ({
     const renderItem = ({ item }) => {
         return (
             <View style={styles.item}>
-                <Button title={item.appealName} onPress={() => handleAppealPress(item)} />
+                <Button title={item.name} onPress={() => handleAppealPress(item)} />
                 <Image source={
-                    item.appealStatus == "approved"
+                    item.isSolved == "approved"
                         ? null //approved.png
                         : null //rejected.png
                 } />
