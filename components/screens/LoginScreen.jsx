@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 const LoginScreen = ({
@@ -6,6 +6,11 @@ const LoginScreen = ({
 }) => {
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        setMail("");
+        setPassword("")
+    }, []);
 
 
     const handleSubmit = async () => {
@@ -52,12 +57,14 @@ const LoginScreen = ({
                 <TextInput
                     style={styles.input}
                     placeholder="Email"
+                    value={mail}
                     onChangeText={text => setMail(text)}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
                     secureTextEntry={true}
+                    value={password}
                     onChangeText={text => setPassword(text)}
                 />
                 <Button title="Submit" onPress={handleSubmit} />

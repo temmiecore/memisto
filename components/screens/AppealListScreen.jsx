@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet, Image, Button, Alert } from 'react-native';
+import circleRed from "../../assets/circle-red.png"
+import circleGreen from "../../assets/circle-green.png"
 
 const AppealListScreen = ({
     navigation,
@@ -25,6 +27,7 @@ const AppealListScreen = ({
             }
 
             const data = await response.json();
+            console.log(data);
             setAppeals(data);
 
         } catch (error) {
@@ -43,10 +46,11 @@ const AppealListScreen = ({
         return (
             <View style={styles.item}>
                 <Button title={item.name} onPress={() => handleAppealPress(item)} />
-                <Image source={
+                <Image style={styles.image} 
+                    source={
                     item.isSolved == "approved"
-                        ? null //approved.png
-                        : null //rejected.png
+                        ? circleGreen
+                        : circleRed
                 } />
             </View>
         )
